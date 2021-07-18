@@ -13,13 +13,19 @@ import android.widget.Toast;
 public class SegundoActiviy extends AppCompatActivity {
 
     private TextView frase_vw;
-
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segundo_activiy);
 
         frase_vw=(TextView)findViewById(R.id.txtv_1);
+
+        Bundle extras= getIntent().getExtras();
+        if(extras!=null){
+            id=extras.getString("id");
+
+        }
 
     }
 
@@ -32,7 +38,7 @@ public class SegundoActiviy extends AppCompatActivity {
       String numrandom=String.valueOf(numrandom_int) ;
 
         Cursor fila = db.rawQuery
-                ("select Nombre,Id FROM cancion WHERE Id="+numrandom, null);
+                ("select Nombre,Id FROM cancion WHERE Id="+id, null);
 
         if (fila.moveToFirst()){
             frase_vw.setText(fila.getString(0));
